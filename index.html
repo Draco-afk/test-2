@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Poppins:wght@400;600&display=swap"
+        rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+
+<body>
+
+<div id="wrapper">
+    <div class="flag__birthday">
+        <img src="1.png" width="350" class="flag__left">
+        <img src="1.png" width="350" class="flag__right">
+    </div>
+
+    <div class="content">
+        <div class="left">
+            <div class="title">
+                <h1 class="happy">
+                    <span style="--t:4s">H</span><span style="--t:4.2s">a</span><span style="--t:4.4s">p</span>
+                    <span style="--t:4.6s">p</span><span style="--t:4.8s">y</span>
+                </h1>
+                <h1 class="birthday">
+                    <span style="--t:5s">B</span><span style="--t:5.2s">i</span><span style="--t:5.4s">r</span>
+                    <span style="--t:5.6s">t</span><span style="--t:5.8s">h</span>
+                    <span style="--t:6s">d</span><span style="--t:6.2s">a</span><span style="--t:6.4s">y</span>
+                </h1>
+                <div class="hat">
+                    <img src="hat.png" width="130">
+                </div>
+            </div>
+
+            <div class="date__of__birth"><span></span></div>
+
+            <div class="btn">
+                <button id="btn__letter">
+                    <div class="mail">
+                        Click Here <i class="fa-regular fa-envelope"></i>
+                    </div>
+                </button>
+                <button id="btn__memories">
+                    💕 Memories
+                </button>
+            </div>
+        </div>
+
+        <div class="right">
+            <div class="box__account">
+                <div class="image">
+                    <img src="unnamed.png">
+                </div>
+                <div class="name">
+                    <i class="fa-solid fa-heart"></i>
+                    <span>Dear P'Aom</span>
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- กล่องจดหมาย -->
+    <div class="boxMail">
+        <i class="fa-solid fa-xmark"></i>
+        <div class="boxMail-container">
+            <div class="card1">
+                <h3>Happy Birthday 🎂</h3>
+            </div>
+            <div class="card2">
+              <h2>ສຸກສັນວັນເກີດເດີ້ ເອື້ອຍອ້ອມ 💕
+                            ຂໍໃຫ້ວັນເກີດຂອງເຈົ້າໃນປີນີ້ ເຕັມໄປດ້ວຍຮອຍຍິ້ມ ແລະຄວາມສຸກ
+                            ຂໍໃຫ້ເຈົ້າມີສຸຂະພາບແຂງແຮງ ຫົວໃຈອົບອຸ່ນ
+                            ຂໍໃຫ້ທຸກຄວາມຝັນທີ່ເຈົ້າຫວັງໄວ້ ຄ່ອຍໆເປັນຈິງ
+                            ໃຫ້ທຸກມື້ຂອງເຈົ້າ ເຕັມໄປດ້ວຍຄວາມຮັກ ແລະຄວາມຫ່ວງໃຍ
+                            ຂໍໃຫ້ເຈົ້າໄດ້ພົບແຕ່ສິ່ງດີໆ ມີຄົນຮັກຄົນແພງຢູ່ຂ້າງໆສະເໝີ
+                            ແລະຂໍໃຫ້ຮອຍຍິ້ມຂອງເຈົ້າ ງາມແບບນີ້ຕະຫຼອດໄປ 🤍✨
+                        </h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- floating heart -->
+<div id="heart-container"></div>
+
+<script>
+/* ========== DATE TYPE EFFECT ========== */
+let datetxt = "4 January";
+let charArrDate = datetxt.split("");
+let currentIndex = 0;
+let dateSpan = document.querySelector(".date__of__birth span");
+
+setTimeout(() => {
+    let timer = setInterval(() => {
+        if (currentIndex < charArrDate.length) {
+            dateSpan.textContent += charArrDate[currentIndex++];
+        } else {
+            clearInterval(timer);
+        }
+    }, 100);
+}, 12000);
+
+/* ========== FLOATING HEART ========== */
+setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart-float";
+    heart.textContent = "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    document.getElementById("heart-container").appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+}, 900);
+
+/* ========== MAIL + CONFETTI ========== */
+const mail = document.querySelector(".mail");
+const boxMail = document.querySelector(".boxMail");
+const closeBtn = document.querySelector(".fa-xmark");
+
+mail.onclick = () => {
+    boxMail.classList.add("active");
+    confetti({
+        particleCount: 180,
+        spread: 120,
+        origin: { y: 0.6 }
+    });
+};
+
+closeBtn.onclick = () => {
+    boxMail.classList.remove("active");
+};
+
+/* ========== CLICK SPARKLE ========== */
+document.addEventListener("click", e => {
+    const star = document.createElement("div");
+    star.textContent = "✨";
+    star.className = "sparkle";
+    star.style.left = e.clientX + "px";
+    star.style.top = e.clientY + "px";
+    document.body.appendChild(star);
+    setTimeout(() => star.remove(), 1000);
+});
+
+/* ========== STAR CURSOR ANIMATION ========== */
+document.addEventListener("mousemove", (e) => {
+    const starCursor = document.querySelector(".star-cursor");
+    if (starCursor) {
+        starCursor.style.left = e.clientX + "px";
+        starCursor.style.top = e.clientY + "px";
+    }
+});
+
+/* ========== MEMORIES MODAL ========== */
+const btnMemories = document.getElementById("btn__memories");
+
+if (btnMemories) {
+    btnMemories.onclick = () => {
+        // Create lightbox with cute images
+        const lightbox = document.createElement('div');
+        lightbox.className = 'cute-lightbox';
+        lightbox.innerHTML = `
+            <div class="cute-lightbox-content">
+                <img src="cute1.png" alt="cute1" class="cute-large-img">
+                <img src="cute2.png" alt="cute2" class="cute-large-img">
+                <button class="cute-close-btn">✕</button>
+            </div>
+        `;
+        
+        document.body.appendChild(lightbox);
+        
+        // Trigger animation
+        setTimeout(() => {
+            lightbox.classList.add('active');
+        }, 10);
+        
+        // Close button
+        const closeBtn = lightbox.querySelector('.cute-close-btn');
+        closeBtn.onclick = () => {
+            lightbox.classList.remove('active');
+            setTimeout(() => {
+                lightbox.remove();
+            }, 300);
+        };
+        
+        // Close on background click
+        lightbox.onclick = (e) => {
+            if (e.target === lightbox) {
+                lightbox.classList.remove('active');
+                setTimeout(() => {
+                    lightbox.remove();
+                }, 300);
+            }
+        };
+    };
+}
+
+/* ========== SEND TO GOW BUTTON ========== */
+const sendBtn = document.createElement('button');
+sendBtn.id = 'send-to-gow';
+sendBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send to Gow';
+document.body.appendChild(sendBtn);
+
+// Create message modal
+const messageModal = document.createElement('div');
+messageModal.id = 'message-modal';
+messageModal.innerHTML = `
+    <div class="message-box">
+        <span class="message-close">&times;</span>
+        <h2>💌 Write a Message to Gow</h2>
+        <textarea id="message-text" placeholder="Write your message here..." maxlength="500"></textarea>
+        <div class="message-footer">
+            <span id="char-count">0/500</span>
+            <button id="message-submit">Send 📤</button>
+        </div>
+    </div>
+`;
+document.body.appendChild(messageModal);
+
+const messageClose = messageModal.querySelector('.message-close');
+const messageSubmit = messageModal.querySelector('#message-submit');
+const messageText = messageModal.querySelector('#message-text');
+const charCount = messageModal.querySelector('#char-count');
+
+sendBtn.onclick = () => {
+    messageModal.classList.add('active');
+};
+
+messageClose.onclick = () => {
+    messageModal.classList.remove('active');
+    messageText.value = '';
+    charCount.textContent = '0/500';
+};
+
+messageModal.onclick = (e) => {
+    if (e.target === messageModal) {
+        messageModal.classList.remove('active');
+        messageText.value = '';
+        charCount.textContent = '0/500';
+    }
+};
+
+messageText.oninput = () => {
+    charCount.textContent = messageText.value.length + '/500';
+};
+
+messageSubmit.onclick = () => {
+    if (messageText.value.trim()) {
+        // Send message to Google Apps Script (Google Sheets)
+        const message = messageText.value;
+        const scriptUrl = 'https://script.google.com/macros/s/AKfycbzQiTXlfF_voZM-giWpbu0gZozyCwTn3YF3987HDogXSNGlCFTupqX2F5roPOa5AT0/exec';
+
+        fetch(scriptUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: 'message=' + encodeURIComponent(message)
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert('Thank you! Message saved to Gow 💖');
+            messageModal.classList.remove('active');
+            messageText.value = '';
+            charCount.textContent = '0/500';
+        })
+        .catch(err => {
+            console.error(err);
+            alert('Message queued locally — will retry next load.');
+            // fallback: save locally
+            try {
+                const queue = JSON.parse(localStorage.getItem('gow_message_queue') || '[]');
+                queue.push({ts: new Date().toISOString(), message});
+                localStorage.setItem('gow_message_queue', JSON.stringify(queue));
+            } catch(e){}
+            messageModal.classList.remove('active');
+            messageText.value = '';
+            charCount.textContent = '0/500';
+        });
+    } else {
+        alert('Please write a message first!');
+    }
+};
+
+// Automatically retry queued messages on load
+window.addEventListener('load', () => {
+    try {
+    const scriptUrl = 'https://script.google.com/macros/s/AKfycbzQiTXlfF_voZM-giWpbu0gZozyCwTn3YF3987HDogXSNGlCFTupqX2F5roPOa5AT0/exec';
+        const queue = JSON.parse(localStorage.getItem('gow_message_queue') || '[]');
+        if (!queue.length) return;
+
+        // send sequentially
+        (async function sendQueue() {
+            for (const item of queue) {
+                try {
+                    await fetch(scriptUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: 'message=' + encodeURIComponent(item.message)
+                    });
+                } catch (e) {
+                    console.error('Retry failed for', item, e);
+                    return; // stop on first failure
+                }
+            }
+            // all sent successfully — clear queue
+            localStorage.removeItem('gow_message_queue');
+            console.log('Queued messages sent');
+        })();
+    } catch (e) { console.error(e); }
+});
+
+</script>
+
+</body>
+</html>
